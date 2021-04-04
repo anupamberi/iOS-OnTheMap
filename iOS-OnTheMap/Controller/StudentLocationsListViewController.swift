@@ -11,9 +11,37 @@ class StudentLocationsListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    
     override func viewDidLoad() {
-        _ = OnTheMapClient.getRecentStudentLocations(completion: { (studentLocations, error) in
+        super.viewDidLoad()
+        // Add left and right navigation item buttons
+        let logoutButton = UIBarButtonItem(title: "LOGOUT", style: .plain, target: self, action: #selector(logoutTapped(_:)))
+        
+        self.navigationItem.leftBarButtonItem = logoutButton
+        
+        let refreshButton = UIBarButtonItem(image: UIImage(named: "icon_refresh"), style: .plain, target: self, action: #selector(refreshTapped(_:)))
+        
+        let addLocationButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addLocationTapped(_:)))
+        
+        self.navigationItem.rightBarButtonItems = [refreshButton, addLocationButton]
+        
+        // Populate student locations if not already populated earlier
+        if StudentLocationModel.studentLocations.count == 0 {
+            populateStudentLocations()
+        }
+    }
+    
+    @objc func refreshTapped(_ sender: UIBarButtonItem) {
+        populateStudentLocations()
+    }
+    
+    @objc func addLocationTapped(_ sender: UIBarButtonItem) {
+        let informationPostingViewController = self.storyboard?.instantiateViewController(identifier: "InformationPostingViewController") as! InformationPostingViewController
+        self.navigationController?.pushViewController(informationPostingViewController, animated: true)
+    }
+    
+    func populateStudentLocations() {
+        OnTheMapClient.getRecentStudentLocations(completion: { (studentLocations, error) in
+            print("Got student locations")
             StudentLocationModel.studentLocations = studentLocations
             self.tableView.reloadData()
         })

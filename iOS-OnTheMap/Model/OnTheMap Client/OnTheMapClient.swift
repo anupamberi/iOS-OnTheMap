@@ -21,16 +21,26 @@ class OnTheMapClient {
         
         case getStudentLocation
         case createSessionId
+        case logoutFromSession
         case updateStudentLocation(String)
+        case getStudentInformation
         
         var stringValue: String {
             switch self {
             
                 case .getStudentLocation: return Endpoints.base + "StudentLocation"
             
-                case .createSessionId: return Endpoints.base + "session"
+                case .createSessionId:
+                    return Endpoints.base + "session"
+                
+                case .logoutFromSession:
+                    return Endpoints.base + "session"
                     
-                case .updateStudentLocation(let objectId): return Endpoints.base + objectId
+                case .updateStudentLocation(let objectId):
+                    return Endpoints.base + objectId
+                    
+                case .getStudentInformation:
+                    return Endpoints.base + "users/" + Auth.uniqueKey
             }
             
         }
@@ -47,6 +57,7 @@ class OnTheMapClient {
         let urlWithQueryItems = urlBase.appending(urlQueryItems)!
         taskForGETRequest(url: urlWithQueryItems, response: StudentsInformation.self) { (response, error) in
             if let response = response {
+                print(response)
                 completion(response.results, nil)
             } else {
                 completion([], error)
@@ -54,7 +65,35 @@ class OnTheMapClient {
         }
     }
     
-    class func postNewStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, completion: @escaping (String?, String?, Error?) -> Void) {
+    class func getStudentInformation(completion: @escaping ([String:Any], Error?) -> Void) {
+        let studentInfoRequest = URLRequest(url: Endpoints.getStudentInformation.url)
+        let session = URLSession.shared
+        let task = session.dataTask(with: studentInfoRequest) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion([:], error)
+                }
+                return
+            }
+            let range = 5..<data.count
+            let newData = data.subdata(in: range)
+            print(String(data: newData, encoding: .utf8)!)
+            do {
+                let studentInformationDictionary = try JSONSerialization.jsonObject(with: newData, options: [])
+                DispatchQueue.main.async {
+                    completion(studentInformationDictionary as! [String : Any], nil)
+                }
+            } catch let jsonErr {
+                DispatchQueue.main.async {
+                    completion([:], jsonErr)
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    class func postNewStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, completion: @escaping (Bool, Error?) -> Void) {
+        
         let studentInformation = StudentInformation(firstName: firstName, lastName: lastName, longitude: longitude, latitude: latitude, mapString: mapString, mediaURL: mediaURL, uniqueKey: Auth.uniqueKey, objectId: nil, createdAt: nil, updatedAt: nil)
         
         var request = URLRequest(url: Endpoints.getStudentLocation.url)
@@ -66,7 +105,7 @@ class OnTheMapClient {
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 DispatchQueue.main.async {
-                    completion(nil, nil, error)
+                    completion(false, error)
                 }
                 return
             }
@@ -75,11 +114,11 @@ class OnTheMapClient {
                 let responseObject = try decoder.decode(PostStudentLocationResponse.self, from: data)
                 Auth.objectId = responseObject.objectId
                 DispatchQueue.main.async {
-                    completion(responseObject.createdAt, responseObject.objectId, nil)
+                    completion(true, nil)
                 }
             } catch {
                 DispatchQueue.main.async {
-                    completion(nil, nil, error)
+                    completion(false, error)
                 }
             }
         }
@@ -160,6 +199,35 @@ class OnTheMapClient {
                     }
                 }
             }
+        }
+        task.resume()
+    }
+    
+    class func logoutFromSession(completion: @escaping () -> Void) {
+        var request = URLRequest(url: Endpoints.logoutFromSession.url)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+          if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+          request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion()
+                }
+                return
+            }
+            let range = 5..<data.count
+            let newData = data.subdata(in: range)
+            print(String(data: newData, encoding: .utf8)!)
+            Auth.sessionId = ""
+            Auth.uniqueKey = ""
+            completion()
         }
         task.resume()
     }

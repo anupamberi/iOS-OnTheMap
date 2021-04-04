@@ -30,7 +30,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        emailTextField.autocorrectionType = .no
+        passwordTextField.autocorrectionType = .no
     }
 
     func handleLoginTappedResponse(success: Bool, error: Error?) {
