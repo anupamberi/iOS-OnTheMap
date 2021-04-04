@@ -43,6 +43,10 @@
 		1E72FD582618CE9600ED7DE1 /* StudentLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD562618CE9600ED7DE1 /* StudentLocationModel.swift */; };
 		1E72FD602618D36100ED7DE1 /* StudentLocationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD5F2618D36100ED7DE1 /* StudentLocationsTableViewCell.swift */; };
 		1E72FD612618D36100ED7DE1 /* StudentLocationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD5F2618D36100ED7DE1 /* StudentLocationsTableViewCell.swift */; };
+		1E72FD6F2619F99500ED7DE1 /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD6E2619F99500ED7DE1 /* InformationPostingViewController.swift */; };
+		1E72FD702619F99500ED7DE1 /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD6E2619F99500ED7DE1 /* InformationPostingViewController.swift */; };
+		1E72FD752619FB1600ED7DE1 /* InformationPostingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD742619FB1600ED7DE1 /* InformationPostingMapViewController.swift */; };
+		1E72FD762619FB1600ED7DE1 /* InformationPostingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD742619FB1600ED7DE1 /* InformationPostingMapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +96,8 @@
 		1E72FD4D2618CA7E00ED7DE1 /* StudentLocationsMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationsMapViewController.swift; sourceTree = "<group>"; };
 		1E72FD562618CE9600ED7DE1 /* StudentLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationModel.swift; sourceTree = "<group>"; };
 		1E72FD5F2618D36100ED7DE1 /* StudentLocationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationsTableViewCell.swift; sourceTree = "<group>"; };
+		1E72FD6E2619F99500ED7DE1 /* InformationPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
+		1E72FD742619FB1600ED7DE1 /* InformationPostingMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationPostingMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +198,8 @@
 				1E72FD442618C96900ED7DE1 /* StudentLocationsListViewController.swift */,
 				1E72FD4D2618CA7E00ED7DE1 /* StudentLocationsMapViewController.swift */,
 				1E72FD5F2618D36100ED7DE1 /* StudentLocationsTableViewCell.swift */,
+				1E72FD6E2619F99500ED7DE1 /* InformationPostingViewController.swift */,
+				1E72FD742619FB1600ED7DE1 /* InformationPostingMapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -381,6 +389,7 @@
 				1E72FCF926174B3500ED7DE1 /* OnTheMapClient.swift in Sources */,
 				1E72FCF1261748BA00ED7DE1 /* StudentLocationResponses.swift in Sources */,
 				1E72FD452618C96900ED7DE1 /* StudentLocationsListViewController.swift in Sources */,
+				1E72FD6F2619F99500ED7DE1 /* InformationPostingViewController.swift in Sources */,
 				1E72FD36261872E800ED7DE1 /* SignUpTextView.swift in Sources */,
 				1E72FCFE261752F700ED7DE1 /* URL.swift in Sources */,
 				1E72FCA726124CF200ED7DE1 /* PostSessionRequest.swift in Sources */,
@@ -388,6 +397,7 @@
 				1E72FD572618CE9600ED7DE1 /* StudentLocationModel.swift in Sources */,
 				1E72FCBB2612628C00ED7DE1 /* PostSessionResponse.swift in Sources */,
 				1E72FC6F26124B6500ED7DE1 /* SceneDelegate.swift in Sources */,
+				1E72FD752619FB1600ED7DE1 /* InformationPostingMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +411,7 @@
 				1E72FD402618C3AA00ED7DE1 /* UiViewControllerExtension.swift in Sources */,
 				1E72FCDD2612692F00ED7DE1 /* StudentsInformationResponseTest.swift in Sources */,
 				1E72FD462618C96900ED7DE1 /* StudentLocationsListViewController.swift in Sources */,
+				1E72FD702619F99500ED7DE1 /* InformationPostingViewController.swift in Sources */,
 				1E72FD582618CE9600ED7DE1 /* StudentLocationModel.swift in Sources */,
 				1E72FCC52612652000ED7DE1 /* PostSessionResponse.swift in Sources */,
 				1E72FD072617534D00ED7DE1 /* URLTest.swift in Sources */,
@@ -408,6 +419,7 @@
 				1E72FD612618D36100ED7DE1 /* StudentLocationsTableViewCell.swift in Sources */,
 				1E72FCB3261253D000ED7DE1 /* PostSessionRequest.swift in Sources */,
 				1E72FD0B2617535D00ED7DE1 /* OnTheMapClient.swift in Sources */,
+				1E72FD762619FB1600ED7DE1 /* InformationPostingMapViewController.swift in Sources */,
 				1E72FD37261872E800ED7DE1 /* SignUpTextView.swift in Sources */,
 				1E72FD1026175B3000ED7DE1 /* OnTheMapClientTest.swift in Sources */,
 				1E72FCCA2612653900ED7DE1 /* PostSessionResponseTest.swift in Sources */,
