@@ -21,23 +21,27 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
         
         let refreshButton = UIBarButtonItem(image: UIImage(named: "icon_refresh"), style: .plain, target: self, action: #selector(refreshTapped(_:)))
         
-        self.navigationItem.rightBarButtonItem = refreshButton
+        let addLocationButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addLocationTapped(_:)))
+        
+        self.navigationItem.rightBarButtonItems = [refreshButton, addLocationButton]
+
         // Populate student locations if not already populated earlier
         if StudentLocationModel.recentStudentLocations.count == 0 {
+            self.showActivity()
             populateStudentLocations()
         }
     }
     
     @objc func refreshTapped(_ sender: UIBarButtonItem) {
+        self.showActivity()
         populateStudentLocations()
     }
     
     func populateStudentLocations() {
         OnTheMapClient.getRecentStudentLocations(completion: { (studentLocations, error) in
-            print("Got student locations")
-            //StudentLocationModel.studentLocations.removeAll()
             StudentLocationModel.recentStudentLocations = studentLocations
             self.mapView.addAnnotations(self.getAnnotations())
+            self.removeActivity()
         })
     }
     

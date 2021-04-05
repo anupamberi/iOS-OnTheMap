@@ -61,7 +61,6 @@ class OnTheMapClient {
         let urlWithQueryItems = urlBase.appending(urlQueryItems)!
         taskForGETRequest(url: urlWithQueryItems, response: StudentsInformation.self) { (response, error) in
             if let response = response {
-                print(response)
                 completion(response.results, nil)
             } else {
                 completion([], error)
@@ -74,13 +73,14 @@ class OnTheMapClient {
     class func getCurrentUserPostedStudentLocation(completion: @escaping (StudentInformation?, Error?) -> Void) {
         taskForGETRequest(url: Endpoints.getCurrentUserPostedStudentLocation.url, response: StudentsInformation.self) { (response, error) in
             if let response = response {
-                print(response)
                 completion(response.results.last, nil)
             } else {
                 completion(nil, error)
             }
         }
     }
+    
+    // MARK: Returns the entire dictionary of student information as key value pairs
     
     class func getStudentInformation(completion: @escaping ([String:Any], Error?) -> Void) {
         let studentInfoRequest = URLRequest(url: Endpoints.getStudentInformation.url)
@@ -107,6 +107,8 @@ class OnTheMapClient {
         }
         task.resume()
     }
+    
+    // MARK: Add new student location information
     
     class func postNewStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, completion: @escaping (Bool, Error?) -> Void) {
         
@@ -141,6 +143,8 @@ class OnTheMapClient {
         task.resume()
     }
     
+    // MARK: Update and existing student location information
+
     class func updateStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, completion: @escaping (Bool, Error?) -> Void) {
         let studentInformation = StudentInformation(firstName: firstName, lastName: lastName, longitude: longitude, latitude: latitude, mapString: mapString, mediaURL: mediaURL, uniqueKey: Auth.uniqueKey)
         var request = URLRequest(url: Endpoints.updateStudentLocation.url)
@@ -163,6 +167,8 @@ class OnTheMapClient {
         }
         task.resume()
     }
+    
+    // MARK: Login and create a session id
     
     class func createSessionId(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         let udacityCredentials = UdacityCredentials(username: username, password: password)
@@ -201,7 +207,6 @@ class OnTheMapClient {
                         completion(false, errorResponse)
                     }
                 } catch {
-                    print(error)
                     DispatchQueue.main.async {
                         completion(false, error)
                     }
@@ -210,6 +215,8 @@ class OnTheMapClient {
         }
         task.resume()
     }
+    
+    // MARK: Delete the session id
     
     class func logoutFromSession(completion: @escaping () -> Void) {
         var request = URLRequest(url: Endpoints.logoutFromSession.url)
@@ -233,6 +240,7 @@ class OnTheMapClient {
             let range = 5..<data.count
             let newData = data.subdata(in: range)
             print(String(data: newData, encoding: .utf8)!)
+            // clean up the uniqueKey & session id
             Auth.sessionId = ""
             Auth.uniqueKey = ""
             completion()
@@ -240,7 +248,7 @@ class OnTheMapClient {
         task.resume()
     }
     
-    class func taskForGETRequest<ResponseType: Decodable>(url: URL, response: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionTask {
+    class func taskForGETRequest<ResponseType: Decodable>(url: URL, response: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 DispatchQueue.main.async {
@@ -253,34 +261,6 @@ class OnTheMapClient {
                 let responseObject = try decoder.decode(ResponseType.self, from: data)
                 DispatchQueue.main.async {
                     completion(responseObject, error)
-                }
-            } catch {
-                completion(nil, error)
-            }
-        }
-        task.resume()
-    
-        return task
-    }
-    
-    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, response: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try! JSONEncoder().encode(body)
-        
-        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-            guard let data = data else {
-                DispatchQueue.main.async {
-                    completion(nil, error)
-                }
-                return
-            }
-            let decoder = JSONDecoder()
-            do {
-                let responseObject = try decoder.decode(ResponseType.self, from: data)
-                DispatchQueue.main.async {
-                    completion(responseObject, nil)
                 }
             } catch {
                 completion(nil, error)

@@ -16,7 +16,7 @@ class InformationPostingMapViewController: UIViewController {
     var locationNaturalLanguageQuery: String!
     // The set media URL
     var mediaURL: String!
-    
+    // Represents the found MapItem from the MKLocalSearch
     private var foundLocationMapItem: MKMapItem = MKMapItem()
     
     override func viewDidLoad() {
@@ -33,6 +33,7 @@ class InformationPostingMapViewController: UIViewController {
         locationRequest.region = mapView.region
         
         let locationSearch = MKLocalSearch(request: locationRequest)
+        self.showActivity()
         locationSearch.start { (response, error) in
             guard let response = response else {
                 self.showStatus(title: "Location search failure", message: "The location could not be found. Please check your search query.")
@@ -41,6 +42,7 @@ class InformationPostingMapViewController: UIViewController {
             self.foundLocationMapItem = response.mapItems[0]
             // Drop pin on map for the first found item
             self.dropPin()
+            self.removeActivity()
         }
     }
     
@@ -53,7 +55,7 @@ class InformationPostingMapViewController: UIViewController {
         locationAnnotation.title = foundLocationMapItem.name
         mapView.addAnnotation(locationAnnotation)
         
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
         let region = MKCoordinateRegion(center: foundLocationPlacemark.coordinate, span: span)
         mapView.setRegion(region, animated: true)
     }
@@ -105,7 +107,8 @@ class InformationPostingMapViewController: UIViewController {
         alertViewController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             // Return control back to the Add location page
             DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: true)
+                //self.navigationController?.popViewController(animated: true)
+                self.dismiss(animated: true, completion: nil)
             }
         }))
         self.present(alertViewController, animated: true, completion: nil)
