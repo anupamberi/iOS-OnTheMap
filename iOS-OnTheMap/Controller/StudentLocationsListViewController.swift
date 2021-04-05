@@ -25,7 +25,7 @@ class StudentLocationsListViewController: UIViewController {
         self.navigationItem.rightBarButtonItems = [refreshButton, addLocationButton]
         
         // Populate student locations if not already populated earlier
-        if StudentLocationModel.studentLocations.count == 0 {
+        if StudentLocationModel.recentStudentLocations.count == 0 {
             populateStudentLocations()
         }
     }
@@ -41,8 +41,7 @@ class StudentLocationsListViewController: UIViewController {
     
     func populateStudentLocations() {
         OnTheMapClient.getRecentStudentLocations(completion: { (studentLocations, error) in
-            print("Got student locations")
-            StudentLocationModel.studentLocations = studentLocations
+            StudentLocationModel.recentStudentLocations = studentLocations
             self.tableView.reloadData()
         })
     }
@@ -55,13 +54,13 @@ extension StudentLocationsListViewController: UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return StudentLocationModel.studentLocations.count
+        return StudentLocationModel.recentStudentLocations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentLocationTableViewCell") as! StudentLocationsTableViewCell
 
-        let studentLocation = StudentLocationModel.studentLocations[indexPath.row]
+        let studentLocation = StudentLocationModel.recentStudentLocations[indexPath.row]
         
         cell.studentFullName.text = studentLocation.firstName + " " + studentLocation.lastName
         cell.iconImageView.image = UIImage(named: "icon_pin")

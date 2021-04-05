@@ -19,30 +19,34 @@ class OnTheMapClient {
         
         static let base = "https://onthemap-api.udacity.com/v1/"
         
-        case getStudentLocation
+        case getOrPostStudentLocation
+        case getCurrentUserPostedStudentLocation
         case createSessionId
         case logoutFromSession
-        case updateStudentLocation(String)
+        case updateStudentLocation
         case getStudentInformation
         
         var stringValue: String {
             switch self {
             
-                case .getStudentLocation: return Endpoints.base + "StudentLocation"
+                case .getOrPostStudentLocation:
+                    return Endpoints.base + "StudentLocation"
             
+                case .getCurrentUserPostedStudentLocation:
+                    return Endpoints.base + "StudentLocation?uniqueKey=" + Auth.uniqueKey
+                
                 case .createSessionId:
                     return Endpoints.base + "session"
                 
                 case .logoutFromSession:
                     return Endpoints.base + "session"
                     
-                case .updateStudentLocation(let objectId):
-                    return Endpoints.base + objectId
+                case .updateStudentLocation:
+                    return Endpoints.base + "StudentLocation/" + Auth.objectId
                     
                 case .getStudentInformation:
                     return Endpoints.base + "users/" + Auth.uniqueKey
             }
-            
         }
         
         var url: URL {
@@ -51,7 +55,7 @@ class OnTheMapClient {
     }
     
     class func getRecentStudentLocations(completion: @escaping ([StudentInformation], Error?) -> Void) {
-        let urlBase = URL(string: Endpoints.getStudentLocation.stringValue)!
+        let urlBase = URL(string: Endpoints.getOrPostStudentLocation.stringValue)!
         let urlQueryItems = [URLQueryItem(name: "limit", value: "100"),
                              URLQueryItem(name: "order", value: "-updatedAt")]
         let urlWithQueryItems = urlBase.appending(urlQueryItems)!
@@ -61,6 +65,19 @@ class OnTheMapClient {
                 completion(response.results, nil)
             } else {
                 completion([], error)
+            }
+        }
+    }
+    
+    // MARK: Returns the last posted student location by the current user. If no location posted, returns nil
+    
+    class func getCurrentUserPostedStudentLocation(completion: @escaping (StudentInformation?, Error?) -> Void) {
+        taskForGETRequest(url: Endpoints.getCurrentUserPostedStudentLocation.url, response: StudentsInformation.self) { (response, error) in
+            if let response = response {
+                print(response)
+                completion(response.results.last, nil)
+            } else {
+                completion(nil, error)
             }
         }
     }
@@ -77,7 +94,6 @@ class OnTheMapClient {
             }
             let range = 5..<data.count
             let newData = data.subdata(in: range)
-            print(String(data: newData, encoding: .utf8)!)
             do {
                 let studentInformationDictionary = try JSONSerialization.jsonObject(with: newData, options: [])
                 DispatchQueue.main.async {
@@ -94,9 +110,9 @@ class OnTheMapClient {
     
     class func postNewStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, completion: @escaping (Bool, Error?) -> Void) {
         
-        let studentInformation = StudentInformation(firstName: firstName, lastName: lastName, longitude: longitude, latitude: latitude, mapString: mapString, mediaURL: mediaURL, uniqueKey: Auth.uniqueKey, objectId: nil, createdAt: nil, updatedAt: nil)
+        let studentInformation = StudentInformation(firstName: firstName, lastName: lastName, longitude: longitude, latitude: latitude, mapString: mapString, mediaURL: mediaURL, uniqueKey: Auth.uniqueKey)
         
-        var request = URLRequest(url: Endpoints.getStudentLocation.url)
+        var request = URLRequest(url: Endpoints.getOrPostStudentLocation.url)
         
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -125,31 +141,23 @@ class OnTheMapClient {
         task.resume()
     }
     
-    class func updateStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, objectId: String, completion: @escaping (String?, Error?) -> Void) {
-        let studentInformation = StudentInformation(firstName: firstName, lastName: lastName, longitude: longitude, latitude: latitude, mapString: mapString, mediaURL: mediaURL, uniqueKey: Auth.uniqueKey, objectId: nil, createdAt: nil, updatedAt: nil)
-        
-        var request = URLRequest(url: Endpoints.updateStudentLocation(objectId).url)
+    class func updateStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, completion: @escaping (Bool, Error?) -> Void) {
+        let studentInformation = StudentInformation(firstName: firstName, lastName: lastName, longitude: longitude, latitude: latitude, mapString: mapString, mediaURL: mediaURL, uniqueKey: Auth.uniqueKey)
+        var request = URLRequest(url: Endpoints.updateStudentLocation.url)
         
         request.httpMethod = "PUT"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try! JSONEncoder().encode(studentInformation)
-        
+
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data else {
+            if error != nil {
                 DispatchQueue.main.async {
-                    completion(nil, error)
-                }
+                     completion(false, error)
+                 }
                 return
-            }
-            let decoder = JSONDecoder()
-            do {
-                let responseObject = try decoder.decode(UpdateStudentLocationResponse.self, from: data)
+            } else {
                 DispatchQueue.main.async {
-                    completion(responseObject.updatedAt, nil)
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    completion(nil, error)
+                    completion(true, error)
                 }
             }
         }

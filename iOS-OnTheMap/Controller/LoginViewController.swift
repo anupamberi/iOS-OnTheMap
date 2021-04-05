@@ -30,7 +30,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // Disable auto correct on text fields
         emailTextField.autocorrectionType = .no
         passwordTextField.autocorrectionType = .no
     }

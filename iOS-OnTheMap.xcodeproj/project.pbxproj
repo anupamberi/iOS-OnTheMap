@@ -47,6 +47,8 @@
 		1E72FD702619F99500ED7DE1 /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD6E2619F99500ED7DE1 /* InformationPostingViewController.swift */; };
 		1E72FD752619FB1600ED7DE1 /* InformationPostingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD742619FB1600ED7DE1 /* InformationPostingMapViewController.swift */; };
 		1E72FD762619FB1600ED7DE1 /* InformationPostingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD742619FB1600ED7DE1 /* InformationPostingMapViewController.swift */; };
+		1E72FD8A261B4F6E00ED7DE1 /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD89261B4F6E00ED7DE1 /* TextFieldExtension.swift */; };
+		1E72FD8B261B4F6E00ED7DE1 /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD89261B4F6E00ED7DE1 /* TextFieldExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +100,7 @@
 		1E72FD5F2618D36100ED7DE1 /* StudentLocationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationsTableViewCell.swift; sourceTree = "<group>"; };
 		1E72FD6E2619F99500ED7DE1 /* InformationPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
 		1E72FD742619FB1600ED7DE1 /* InformationPostingMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationPostingMapViewController.swift; sourceTree = "<group>"; };
+		1E72FD89261B4F6E00ED7DE1 /* TextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				1E72FD35261872E800ED7DE1 /* SignUpTextView.swift */,
+				1E72FD89261B4F6E00ED7DE1 /* TextFieldExtension.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -391,6 +395,7 @@
 				1E72FD452618C96900ED7DE1 /* StudentLocationsListViewController.swift in Sources */,
 				1E72FD6F2619F99500ED7DE1 /* InformationPostingViewController.swift in Sources */,
 				1E72FD36261872E800ED7DE1 /* SignUpTextView.swift in Sources */,
+				1E72FD8A261B4F6E00ED7DE1 /* TextFieldExtension.swift in Sources */,
 				1E72FCFE261752F700ED7DE1 /* URL.swift in Sources */,
 				1E72FCA726124CF200ED7DE1 /* PostSessionRequest.swift in Sources */,
 				1E72FC6D26124B6500ED7DE1 /* AppDelegate.swift in Sources */,
@@ -418,6 +423,7 @@
 				1E72FCEC2612693C00ED7DE1 /* StudentsInformation.swift in Sources */,
 				1E72FD612618D36100ED7DE1 /* StudentLocationsTableViewCell.swift in Sources */,
 				1E72FCB3261253D000ED7DE1 /* PostSessionRequest.swift in Sources */,
+				1E72FD8B261B4F6E00ED7DE1 /* TextFieldExtension.swift in Sources */,
 				1E72FD0B2617535D00ED7DE1 /* OnTheMapClient.swift in Sources */,
 				1E72FD762619FB1600ED7DE1 /* InformationPostingMapViewController.swift in Sources */,
 				1E72FD37261872E800ED7DE1 /* SignUpTextView.swift in Sources */,

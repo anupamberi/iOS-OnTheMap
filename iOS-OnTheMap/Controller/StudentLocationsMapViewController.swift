@@ -23,7 +23,7 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
         
         self.navigationItem.rightBarButtonItem = refreshButton
         // Populate student locations if not already populated earlier
-        if StudentLocationModel.studentLocations.count == 0 {
+        if StudentLocationModel.recentStudentLocations.count == 0 {
             populateStudentLocations()
         }
     }
@@ -36,7 +36,7 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
         OnTheMapClient.getRecentStudentLocations(completion: { (studentLocations, error) in
             print("Got student locations")
             //StudentLocationModel.studentLocations.removeAll()
-            StudentLocationModel.studentLocations = studentLocations
+            StudentLocationModel.recentStudentLocations = studentLocations
             self.mapView.addAnnotations(self.getAnnotations())
         })
     }
@@ -44,7 +44,7 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
     func getAnnotations() -> [MKAnnotation] {
         var annotations = [MKAnnotation]()
         // Code adapted from pinSample example
-        for studentLocation in StudentLocationModel.studentLocations {
+        for studentLocation in StudentLocationModel.recentStudentLocations {
             let lat = CLLocationDegrees(studentLocation.latitude)
             let long = CLLocationDegrees(studentLocation.longitude)
             
