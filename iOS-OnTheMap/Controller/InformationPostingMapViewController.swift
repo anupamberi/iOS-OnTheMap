@@ -12,9 +12,11 @@ class InformationPostingMapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    // The location search query value
     var locationNaturalLanguageQuery: String!
+    // The set media URL
     var mediaURL: String!
-
+    
     private var foundLocationMapItem: MKMapItem = MKMapItem()
     
     override func viewDidLoad() {
@@ -33,7 +35,7 @@ class InformationPostingMapViewController: UIViewController {
         let locationSearch = MKLocalSearch(request: locationRequest)
         locationSearch.start { (response, error) in
             guard let response = response else {
-                self.showFailure(message: "The location could not be found")
+                self.showStatus(title: "Location search failure", message: "The location could not be found. Please check your search query.")
                 return
             }
             self.foundLocationMapItem = response.mapItems[0]
@@ -57,14 +59,18 @@ class InformationPostingMapViewController: UIViewController {
     }
     
     @IBAction func finishTapped(_ sender: Any) {
-        // Get basic student information
-        OnTheMapClient.getStudentInformation { (studentInformationDictionary, error) in
-            print("On completion")
-            
+        if let lastStudentLocationInformation = StudentLocationModel.lastLocationInformation {
+            // Found a previous student location, we update the location
+            updateStudentLocation(lastStudentLocationInformation: lastStudentLocationInformation)
+        } else {
+            // Get basic student information
+            OnTheMapClient.getStudentInformation { (studentInformationDictionary, error) in
+                self.addStudentLocation(studentInformationDictionary: studentInformationDictionary)
+            }
         }
     }
     
-    func postStudentLocation(studentInformationDictionary: [String:Any]) {
+    func addStudentLocation(studentInformationDictionary: [String:Any]) {
         // Get user info
         let firstName = studentInformationDictionary["first_name"] as! String
         let lastName = studentInformationDictionary["last_name"] as! String
@@ -77,16 +83,31 @@ class InformationPostingMapViewController: UIViewController {
         // Post the student information
         OnTheMapClient.postNewStudentLocation(firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude) { (success, error) in
             if success {
-                
+                self.showStatus(title: "Added location successfully", message: "The location was successfully posted to the server.")
             } else {
-                self.showFailure(message: error?.localizedDescription ?? "")
+                self.showStatus(title: "Add location failed", message: error?.localizedDescription ?? "")
             }
         }
     }
     
-    func showFailure(message: String) {
-        let alertVC = UIAlertController(title: "Add location failed", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
+    func updateStudentLocation(lastStudentLocationInformation: StudentInformation) {
+        OnTheMapClient.updateStudentLocation(firstName: lastStudentLocationInformation.firstName, lastName: lastStudentLocationInformation.lastName, mapString: locationNaturalLanguageQuery!, mediaURL: mediaURL, latitude: foundLocationMapItem.placemark.coordinate.latitude, longitude: foundLocationMapItem.placemark.coordinate.longitude) { (success, error) in
+            if success {
+                self.showStatus(title: "Location updated successfully", message: "The location was successfully updated to the server.")
+            } else {
+                self.showStatus(title: "Add location failed", message: error?.localizedDescription ?? "")
+            }
+        }
+    }
+    
+    func showStatus(title: String, message: String) {
+        let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertViewController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            // Return control back to the Add location page
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }))
+        self.present(alertViewController, animated: true, completion: nil)
     }
 }

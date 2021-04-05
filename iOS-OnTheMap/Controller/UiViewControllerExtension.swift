@@ -9,10 +9,10 @@ import UIKit
 extension UIViewController {
     
     @objc func logoutTapped(_ sender: UIBarButtonItem) {
-        StudentLocationModel.studentLocations.removeAll()
+        StudentLocationModel.recentStudentLocations.removeAll()
         OnTheMapClient.logoutFromSession {
             // Remove all elements from the location model
-            StudentLocationModel.studentLocations.removeAll()
+            StudentLocationModel.recentStudentLocations.removeAll()
             // Dismiss view
             DispatchQueue.main.async {
                 self.dismiss(animated: true, completion: nil)
