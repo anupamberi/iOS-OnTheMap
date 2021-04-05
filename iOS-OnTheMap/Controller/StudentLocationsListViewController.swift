@@ -26,23 +26,21 @@ class StudentLocationsListViewController: UIViewController {
         
         // Populate student locations if not already populated earlier
         if StudentLocationModel.recentStudentLocations.count == 0 {
+            self.showActivity()
             populateStudentLocations()
         }
     }
     
     @objc func refreshTapped(_ sender: UIBarButtonItem) {
+        self.showActivity()
         populateStudentLocations()
-    }
-    
-    @objc func addLocationTapped(_ sender: UIBarButtonItem) {
-        let informationPostingViewController = self.storyboard?.instantiateViewController(identifier: "InformationPostingViewController") as! InformationPostingViewController
-        self.navigationController?.pushViewController(informationPostingViewController, animated: true)
     }
     
     func populateStudentLocations() {
         OnTheMapClient.getRecentStudentLocations(completion: { (studentLocations, error) in
             StudentLocationModel.recentStudentLocations = studentLocations
             self.tableView.reloadData()
+            self.removeActivity()
         })
     }
 }
@@ -60,12 +58,23 @@ extension StudentLocationsListViewController: UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentLocationTableViewCell") as! StudentLocationsTableViewCell
 
-        let studentLocation = StudentLocationModel.recentStudentLocations[indexPath.row]
+        let studentLocationInformation = StudentLocationModel.recentStudentLocations[indexPath.row]
         
-        cell.studentFullName.text = studentLocation.firstName + " " + studentLocation.lastName
+        cell.studentFullName.text = studentLocationInformation.firstName + " " + studentLocationInformation.lastName
         cell.iconImageView.image = UIImage(named: "icon_pin")
-        cell.studentMediaURL.text = studentLocation.mediaURL
+        cell.studentMediaURL.text = studentLocationInformation.mediaURL
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let studentLocationInformation = StudentLocationModel.recentStudentLocations[indexPath.row]
+
+        guard let requestURL = URL(string: studentLocationInformation.mediaURL) else {
+            return
+        }
+        // Open the URL
+        UIApplication.shared.open(requestURL, options: [:], completionHandler: nil)
+        
     }
 }

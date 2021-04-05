@@ -7,6 +7,8 @@
 
 import XCTest
 
+// MARK: Unit testing the differenc Udacity API calls. The network calls should be mocked so as our tests
+// are not dependent on real network calls
 class OnTheMapClientTest: XCTestCase {
 
     func testGETRecentStudentLocations() throws {

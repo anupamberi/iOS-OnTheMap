@@ -23,16 +23,26 @@ class LoginViewController: UIViewController {
     }
     
     
-    @IBAction func loginTapped(_ sender: Any) {
-        setLoggingIn(true)
-        OnTheMapClient.createSessionId(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleLoginTappedResponse(success:error:))
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Disable auto correct on text fields
         emailTextField.autocorrectionType = .no
         passwordTextField.autocorrectionType = .no
+        // Set left padding
+        emailTextField.setLeftPaddingPoints(10.0)
+        passwordTextField.setLeftPaddingPoints(10.0)
+    }
+    
+    @IBAction func loginTapped(_ sender: Any) {
+        if emailTextField.isEmpty || passwordTextField.isEmpty {
+            // Either of the text fields are empty
+            let alertViewController = UIAlertController(title: nil, message: "Username and/or password not set. Please enter a username and a password.", preferredStyle: .alert)
+            alertViewController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertViewController, animated: true, completion: nil)
+        } else {
+            setLoggingIn(true)
+            OnTheMapClient.createSessionId(username: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleLoginTappedResponse(success:error:))
+        }
     }
 
     func handleLoginTappedResponse(success: Bool, error: Error?) {

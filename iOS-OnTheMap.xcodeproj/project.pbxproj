@@ -33,8 +33,8 @@
 		1E72FD1026175B3000ED7DE1 /* OnTheMapClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD0F26175B3000ED7DE1 /* OnTheMapClientTest.swift */; };
 		1E72FD36261872E800ED7DE1 /* SignUpTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD35261872E800ED7DE1 /* SignUpTextView.swift */; };
 		1E72FD37261872E800ED7DE1 /* SignUpTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD35261872E800ED7DE1 /* SignUpTextView.swift */; };
-		1E72FD3F2618C3AA00ED7DE1 /* UiViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD3E2618C3AA00ED7DE1 /* UiViewControllerExtension.swift */; };
-		1E72FD402618C3AA00ED7DE1 /* UiViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD3E2618C3AA00ED7DE1 /* UiViewControllerExtension.swift */; };
+		1E72FD3F2618C3AA00ED7DE1 /* UiViewControllerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD3E2618C3AA00ED7DE1 /* UiViewControllerUtil.swift */; };
+		1E72FD402618C3AA00ED7DE1 /* UiViewControllerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD3E2618C3AA00ED7DE1 /* UiViewControllerUtil.swift */; };
 		1E72FD452618C96900ED7DE1 /* StudentLocationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD442618C96900ED7DE1 /* StudentLocationsListViewController.swift */; };
 		1E72FD462618C96900ED7DE1 /* StudentLocationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD442618C96900ED7DE1 /* StudentLocationsListViewController.swift */; };
 		1E72FD4E2618CA7E00ED7DE1 /* StudentLocationsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD4D2618CA7E00ED7DE1 /* StudentLocationsMapViewController.swift */; };
@@ -47,8 +47,8 @@
 		1E72FD702619F99500ED7DE1 /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD6E2619F99500ED7DE1 /* InformationPostingViewController.swift */; };
 		1E72FD752619FB1600ED7DE1 /* InformationPostingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD742619FB1600ED7DE1 /* InformationPostingMapViewController.swift */; };
 		1E72FD762619FB1600ED7DE1 /* InformationPostingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD742619FB1600ED7DE1 /* InformationPostingMapViewController.swift */; };
-		1E72FD8A261B4F6E00ED7DE1 /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD89261B4F6E00ED7DE1 /* TextFieldExtension.swift */; };
-		1E72FD8B261B4F6E00ED7DE1 /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD89261B4F6E00ED7DE1 /* TextFieldExtension.swift */; };
+		1E72FD8A261B4F6E00ED7DE1 /* TextFieldUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD89261B4F6E00ED7DE1 /* TextFieldUtil.swift */; };
+		1E72FD8B261B4F6E00ED7DE1 /* TextFieldUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD89261B4F6E00ED7DE1 /* TextFieldUtil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,14 +93,14 @@
 		1E72FD062617534D00ED7DE1 /* URLTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLTest.swift; sourceTree = "<group>"; };
 		1E72FD0F26175B3000ED7DE1 /* OnTheMapClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapClientTest.swift; sourceTree = "<group>"; };
 		1E72FD35261872E800ED7DE1 /* SignUpTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextView.swift; sourceTree = "<group>"; };
-		1E72FD3E2618C3AA00ED7DE1 /* UiViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiViewControllerExtension.swift; sourceTree = "<group>"; };
+		1E72FD3E2618C3AA00ED7DE1 /* UiViewControllerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiViewControllerUtil.swift; sourceTree = "<group>"; };
 		1E72FD442618C96900ED7DE1 /* StudentLocationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationsListViewController.swift; sourceTree = "<group>"; };
 		1E72FD4D2618CA7E00ED7DE1 /* StudentLocationsMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationsMapViewController.swift; sourceTree = "<group>"; };
 		1E72FD562618CE9600ED7DE1 /* StudentLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationModel.swift; sourceTree = "<group>"; };
 		1E72FD5F2618D36100ED7DE1 /* StudentLocationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationsTableViewCell.swift; sourceTree = "<group>"; };
 		1E72FD6E2619F99500ED7DE1 /* InformationPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
 		1E72FD742619FB1600ED7DE1 /* InformationPostingMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationPostingMapViewController.swift; sourceTree = "<group>"; };
-		1E72FD89261B4F6E00ED7DE1 /* TextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtension.swift; sourceTree = "<group>"; };
+		1E72FD89261B4F6E00ED7DE1 /* TextFieldUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,7 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				1E72FD35261872E800ED7DE1 /* SignUpTextView.swift */,
-				1E72FD89261B4F6E00ED7DE1 /* TextFieldExtension.swift */,
+				1E72FD89261B4F6E00ED7DE1 /* TextFieldUtil.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -198,7 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				1E72FC7026124B6500ED7DE1 /* LoginViewController.swift */,
-				1E72FD3E2618C3AA00ED7DE1 /* UiViewControllerExtension.swift */,
+				1E72FD3E2618C3AA00ED7DE1 /* UiViewControllerUtil.swift */,
 				1E72FD442618C96900ED7DE1 /* StudentLocationsListViewController.swift */,
 				1E72FD4D2618CA7E00ED7DE1 /* StudentLocationsMapViewController.swift */,
 				1E72FD5F2618D36100ED7DE1 /* StudentLocationsTableViewCell.swift */,
@@ -385,7 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E72FD4E2618CA7E00ED7DE1 /* StudentLocationsMapViewController.swift in Sources */,
-				1E72FD3F2618C3AA00ED7DE1 /* UiViewControllerExtension.swift in Sources */,
+				1E72FD3F2618C3AA00ED7DE1 /* UiViewControllerUtil.swift in Sources */,
 				1E72FCD82612685100ED7DE1 /* StudentsInformation.swift in Sources */,
 				1E72FCD02612675F00ED7DE1 /* StudentInformation.swift in Sources */,
 				1E72FD602618D36100ED7DE1 /* StudentLocationsTableViewCell.swift in Sources */,
@@ -395,7 +395,7 @@
 				1E72FD452618C96900ED7DE1 /* StudentLocationsListViewController.swift in Sources */,
 				1E72FD6F2619F99500ED7DE1 /* InformationPostingViewController.swift in Sources */,
 				1E72FD36261872E800ED7DE1 /* SignUpTextView.swift in Sources */,
-				1E72FD8A261B4F6E00ED7DE1 /* TextFieldExtension.swift in Sources */,
+				1E72FD8A261B4F6E00ED7DE1 /* TextFieldUtil.swift in Sources */,
 				1E72FCFE261752F700ED7DE1 /* URL.swift in Sources */,
 				1E72FCA726124CF200ED7DE1 /* PostSessionRequest.swift in Sources */,
 				1E72FC6D26124B6500ED7DE1 /* AppDelegate.swift in Sources */,
@@ -413,7 +413,7 @@
 				1E72FCE82612693500ED7DE1 /* StudentInformation.swift in Sources */,
 				1E72FCAF2612508900ED7DE1 /* PostSessionRequestTest.swift in Sources */,
 				1E72FD022617533E00ED7DE1 /* URL.swift in Sources */,
-				1E72FD402618C3AA00ED7DE1 /* UiViewControllerExtension.swift in Sources */,
+				1E72FD402618C3AA00ED7DE1 /* UiViewControllerUtil.swift in Sources */,
 				1E72FCDD2612692F00ED7DE1 /* StudentsInformationResponseTest.swift in Sources */,
 				1E72FD462618C96900ED7DE1 /* StudentLocationsListViewController.swift in Sources */,
 				1E72FD702619F99500ED7DE1 /* InformationPostingViewController.swift in Sources */,
@@ -423,7 +423,7 @@
 				1E72FCEC2612693C00ED7DE1 /* StudentsInformation.swift in Sources */,
 				1E72FD612618D36100ED7DE1 /* StudentLocationsTableViewCell.swift in Sources */,
 				1E72FCB3261253D000ED7DE1 /* PostSessionRequest.swift in Sources */,
-				1E72FD8B261B4F6E00ED7DE1 /* TextFieldExtension.swift in Sources */,
+				1E72FD8B261B4F6E00ED7DE1 /* TextFieldUtil.swift in Sources */,
 				1E72FD0B2617535D00ED7DE1 /* OnTheMapClient.swift in Sources */,
 				1E72FD762619FB1600ED7DE1 /* InformationPostingMapViewController.swift in Sources */,
 				1E72FD37261872E800ED7DE1 /* SignUpTextView.swift in Sources */,

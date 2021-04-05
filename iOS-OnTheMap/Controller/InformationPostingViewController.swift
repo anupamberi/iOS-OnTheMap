@@ -23,9 +23,13 @@ class InformationPostingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Add Location"
         // Disable auto correct on text fields
         locationTextField.autocorrectionType = .no
         linkTextField.autocorrectionType = .no
+        // Set left padding
+        locationTextField.setLeftPaddingPoints(10.0)
+        linkTextField.setLeftPaddingPoints(10.0)
         
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelTapped(_:)))
         // Add a cancel button
@@ -50,7 +54,7 @@ class InformationPostingViewController: UIViewController {
     }
     
     @objc func cancelTapped(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func checkLocationOverwrite() {
