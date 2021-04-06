@@ -14,6 +14,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var udacitySignUpTextView: UITextView!
+    
+    let udacitySignUpURL = "https://auth.udacity.com/sign-up"
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -28,6 +31,8 @@ class LoginViewController: UIViewController {
         // Disable auto correct on text fields
         emailTextField.autocorrectionType = .no
         passwordTextField.autocorrectionType = .no
+        // Set the udacity sign up page URL
+        udacitySignUpTextView.addHyperlink(originalText: "Don't have an account? Sign Up", hyperLink: "Sign Up", urlString: udacitySignUpURL)
         // Set left padding
         emailTextField.setLeftPaddingPoints(10.0)
         passwordTextField.setLeftPaddingPoints(10.0)
@@ -71,6 +76,20 @@ class LoginViewController: UIViewController {
         let alertVC = UIAlertController(title: "Login failed", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         show(alertVC, sender: nil)
+    }
+}
+
+// MARK: Extension to handle redirection to Udacity Sign Up Page
+extension LoginViewController: UITextViewDelegate {
+    
+    // MARK: Open the Udacity Sign up page on tapping the link
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        if (URL.absoluteString == udacitySignUpURL) {
+            UIApplication.shared.open(URL) { (Bool) in
+            }
+        }
+        return false
     }
 }
 

@@ -11,7 +11,8 @@ fileprivate var activityView : UIView?
 // MARK : Contains utility methods that are reused among UIViewControllers
 
 extension UIViewController {
-    
+    // MARK: Reusable activity progress indicators among different UIViewControllers
+    // Reference: https://www.youtube.com/watch?v=twgb5IPwR4I
     func showActivity() {
         activityView = UIView(frame: self.view.bounds)
         activityView?.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
@@ -43,6 +44,4 @@ extension UIViewController {
         let informationPostingViewController = self.storyboard?.instantiateViewController(identifier: "InformationPostingViewController") as! InformationPostingViewController
         self.present(UINavigationController(rootViewController: informationPostingViewController), animated: true)
     }
-    
-    
 }
