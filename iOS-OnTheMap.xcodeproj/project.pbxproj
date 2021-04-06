@@ -31,8 +31,8 @@
 		1E72FD072617534D00ED7DE1 /* URLTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD062617534D00ED7DE1 /* URLTest.swift */; };
 		1E72FD0B2617535D00ED7DE1 /* OnTheMapClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FCF826174B3500ED7DE1 /* OnTheMapClient.swift */; };
 		1E72FD1026175B3000ED7DE1 /* OnTheMapClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD0F26175B3000ED7DE1 /* OnTheMapClientTest.swift */; };
-		1E72FD36261872E800ED7DE1 /* SignUpTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD35261872E800ED7DE1 /* SignUpTextView.swift */; };
-		1E72FD37261872E800ED7DE1 /* SignUpTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD35261872E800ED7DE1 /* SignUpTextView.swift */; };
+		1E72FD36261872E800ED7DE1 /* TextViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD35261872E800ED7DE1 /* TextViewUtil.swift */; };
+		1E72FD37261872E800ED7DE1 /* TextViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD35261872E800ED7DE1 /* TextViewUtil.swift */; };
 		1E72FD3F2618C3AA00ED7DE1 /* UiViewControllerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD3E2618C3AA00ED7DE1 /* UiViewControllerUtil.swift */; };
 		1E72FD402618C3AA00ED7DE1 /* UiViewControllerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD3E2618C3AA00ED7DE1 /* UiViewControllerUtil.swift */; };
 		1E72FD452618C96900ED7DE1 /* StudentLocationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E72FD442618C96900ED7DE1 /* StudentLocationsListViewController.swift */; };
@@ -92,7 +92,7 @@
 		1E72FCFD261752F700ED7DE1 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		1E72FD062617534D00ED7DE1 /* URLTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLTest.swift; sourceTree = "<group>"; };
 		1E72FD0F26175B3000ED7DE1 /* OnTheMapClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapClientTest.swift; sourceTree = "<group>"; };
-		1E72FD35261872E800ED7DE1 /* SignUpTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextView.swift; sourceTree = "<group>"; };
+		1E72FD35261872E800ED7DE1 /* TextViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewUtil.swift; sourceTree = "<group>"; };
 		1E72FD3E2618C3AA00ED7DE1 /* UiViewControllerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiViewControllerUtil.swift; sourceTree = "<group>"; };
 		1E72FD442618C96900ED7DE1 /* StudentLocationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationsListViewController.swift; sourceTree = "<group>"; };
 		1E72FD4D2618CA7E00ED7DE1 /* StudentLocationsMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationsMapViewController.swift; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 		1E72FCA026124BB900ED7DE1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1E72FD35261872E800ED7DE1 /* SignUpTextView.swift */,
+				1E72FD35261872E800ED7DE1 /* TextViewUtil.swift */,
 				1E72FD89261B4F6E00ED7DE1 /* TextFieldUtil.swift */,
 			);
 			path = View;
@@ -394,7 +394,7 @@
 				1E72FCF1261748BA00ED7DE1 /* StudentLocationResponses.swift in Sources */,
 				1E72FD452618C96900ED7DE1 /* StudentLocationsListViewController.swift in Sources */,
 				1E72FD6F2619F99500ED7DE1 /* InformationPostingViewController.swift in Sources */,
-				1E72FD36261872E800ED7DE1 /* SignUpTextView.swift in Sources */,
+				1E72FD36261872E800ED7DE1 /* TextViewUtil.swift in Sources */,
 				1E72FD8A261B4F6E00ED7DE1 /* TextFieldUtil.swift in Sources */,
 				1E72FCFE261752F700ED7DE1 /* URL.swift in Sources */,
 				1E72FCA726124CF200ED7DE1 /* PostSessionRequest.swift in Sources */,
@@ -426,7 +426,7 @@
 				1E72FD8B261B4F6E00ED7DE1 /* TextFieldUtil.swift in Sources */,
 				1E72FD0B2617535D00ED7DE1 /* OnTheMapClient.swift in Sources */,
 				1E72FD762619FB1600ED7DE1 /* InformationPostingMapViewController.swift in Sources */,
-				1E72FD37261872E800ED7DE1 /* SignUpTextView.swift in Sources */,
+				1E72FD37261872E800ED7DE1 /* TextViewUtil.swift in Sources */,
 				1E72FD1026175B3000ED7DE1 /* OnTheMapClientTest.swift in Sources */,
 				1E72FCCA2612653900ED7DE1 /* PostSessionResponseTest.swift in Sources */,
 				1E72FD4F2618CA7E00ED7DE1 /* StudentLocationsMapViewController.swift in Sources */,

@@ -70,6 +70,9 @@
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.90000000000000002" contentMode="scaleToFill" editable="NO" text="Dont have an account ? Sign Up" textAlignment="center" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A4x-Sy-Pgp" userLabel="Sign Up">
                                         <rect key="frame" x="0.0" y="236" width="374" height="50"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" link="YES"/>
+                                        </accessibility>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="bfj-bC-BzM"/>
                                         </constraints>
@@ -77,6 +80,9 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="gPl-Q3-Qo4"/>
+                                        </connections>
                                     </textView>
                                 </subviews>
                                 <constraints>
@@ -114,6 +120,7 @@
                         <outlet property="emailTextField" destination="owj-eT-BT8" id="7rZ-ca-TSU"/>
                         <outlet property="loginButton" destination="41D-nz-SrS" id="9bJ-SK-WaV"/>
                         <outlet property="passwordTextField" destination="OEi-Ll-crY" id="O1p-S5-pLW"/>
+                        <outlet property="udacitySignUpTextView" destination="A4x-Sy-Pgp" id="TTQ-Xy-oVE"/>
                         <segue destination="jBw-t1-rdy" kind="presentation" identifier="completeLogin" id="69r-xO-Cz0"/>
                     </connections>
                 </viewController>
