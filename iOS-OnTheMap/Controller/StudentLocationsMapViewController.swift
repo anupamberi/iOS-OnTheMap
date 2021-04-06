@@ -39,9 +39,17 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
     
     func populateStudentLocations() {
         OnTheMapClient.getRecentStudentLocations(completion: { (studentLocations, error) in
-            StudentLocationModel.recentStudentLocations = studentLocations
-            self.mapView.addAnnotations(self.getAnnotations())
-            self.removeActivity()
+            if let error = error {
+                print(error)
+                self.showLocationsFetchFailure(message: "Could not fetch the student location information. Please try later.")
+                self.removeActivity()
+            } else {
+                StudentLocationModel.recentStudentLocations = studentLocations
+                // Remove previous annotations
+                self.mapView.removeAnnotations(self.mapView.annotations)
+                self.mapView.addAnnotations(self.getAnnotations())
+                self.removeActivity()
+            }
         })
     }
     
@@ -92,6 +100,11 @@ class StudentLocationsMapViewController: UIViewController, MKMapViewDelegate {
         return pinView
     }
 
+    func showLocationsFetchFailure(message: String) {
+        let alertVC = UIAlertController(title: "Locations fetch error", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertVC, animated: true, completion: nil)
+    }
     
     // This delegate method is implemented to respond to taps. It opens the system browser
     // to the URL specified in the annotationViews subtitle property.

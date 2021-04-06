@@ -38,10 +38,22 @@ class StudentLocationsListViewController: UIViewController {
     
     func populateStudentLocations() {
         OnTheMapClient.getRecentStudentLocations(completion: { (studentLocations, error) in
-            StudentLocationModel.recentStudentLocations = studentLocations
-            self.tableView.reloadData()
-            self.removeActivity()
+            if let error = error {
+                print(error)
+                self.showLocationsFetchFailure(message: "Could not fetch the student location information. Please try later.")
+                self.removeActivity()
+            } else {
+                StudentLocationModel.recentStudentLocations = studentLocations
+                self.tableView.reloadData()
+                self.removeActivity()
+            }
         })
+    }
+    
+    func showLocationsFetchFailure(message: String) {
+        let alertVC = UIAlertController(title: "Locations fetch error", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertVC, animated: true, completion: nil)
     }
 }
 
@@ -75,6 +87,5 @@ extension StudentLocationsListViewController: UITableViewDataSource, UITableView
         }
         // Open the URL
         UIApplication.shared.open(requestURL, options: [:], completionHandler: nil)
-        
     }
 }
